@@ -13,7 +13,7 @@ const getDatabases = () => {
       console.log("mongo connected");
       client.db().admin()
         .listDatabases().then(dbs => {
-          console.log('Tengo lista');
+          console.log("Tengo lista");
           console.log(dbs);
           client.close();
         });
@@ -23,5 +23,22 @@ const getDatabases = () => {
       throw err;
     });
 };
+
+const getColections = () => {
+  client.connect()
+    .then(client => {
+      console.log("mongo connected");
+      client.db().listCollections().toArray(function (err, collInfos) {
+        console.log("Tengo lista");
+        console.log(dbs);
+        client.close();
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      throw err;
+    });
+};
+
 
 exports.getDatabases = getDatabases;
