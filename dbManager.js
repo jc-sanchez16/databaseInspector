@@ -30,7 +30,7 @@ const getColections = () => {
       console.log("mongo connected");
       client.db().listCollections().toArray(function (err, collInfos) {
         console.log("Tengo lista");
-        console.log(dbs);
+        console.log(collInfos);
         client.close();
       });
     })
