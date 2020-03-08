@@ -6,8 +6,8 @@ const MongoClient = mongo.MongoClient;
 function Database() {
   const db = {};
 
-  const pass = "12345789"
-  const user = "jcsanchez16"
+  const pass = process.env.PASS;
+  const user = process.env.USER;
   db.connect = () => {
     const url = `mongodb+srv://${user}:${pass}@cluster0-9ajzd.mongodb.net/test?retryWrites=true&w=majority`;
     const client = new MongoClient(url, { useUnifiedTopology: true });
