@@ -23,14 +23,103 @@
 </head>
 
 <body>
-  <body>
     <h1>Database Inspector</h1>
 
-    <h3>Select Which database to check</h3>
-    <select id="dbSelect"></select>
-
-    <div id="Collections" >
-      <select name="collections" id="cllectionsSelect"></select>
+    <div class="card-group">
+      <div class="card" id="dbs-list">
+        <div class="card-header">
+          <h3>Database</h3>
+        </div>
+        <div class="card-body short">
+          <input type="text" class="w-100" placeholder="¿Que estas buscando?">
+        </div>
+        <ul class="list-group list-group-flush scrollable">
+          <% databases.forEach(db=>{%>
+          <a onclick="selectDB('<%=db.name%>')" class="w-100">
+            <li class="list-group-item clickable">
+              <%= db.name%>
+            </li>
+          </a>
+          <%})%>
+        </ul>
+      </div>
+      <div class="card d-none" id='collections-list'>
+        <div class="card-header">
+          <h3>Collections</h3>
+        </div>
+          <div class="card-body short">
+            <input type="text" class="w-100" placeholder="¿Que estas buscando?">
+          </div>
+          <ul class="list-group list-group-flush scrollable">
+          </ul>
+      </div>
+      <div class="card d-none" id='documents-list'>
+        <div class="card-header">
+          <h3 class="w-50 d-inline">Documents</h3>
+          <button class="btn  btn-primary float-right" data-toggle="modal" data-target="#addModal" onclick="add()">+</button>
+        </div>
+        <ul class="list-group list-group-flush scrollable">
+        </ul>
+        <div class="card-footer">
+          pagina 
+        </div>
+      </div>
+      <div class="card d-none" id='document-detail'>
+        <div class="card-header">
+          <h3 class="w-50 d-inline">Documents</h3>
+          <button class="btn  btn-primary float-right" data-toggle="modal" data-target="#editModal" onclick="edit()">edit</button>
+          <button class="btn  btn-primary float-right">delete</button>
+        </div>
+        <ul class="list-group list-group-flush scrollable">
+        </ul>
+      </div>
     </div>
-  </body>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add new</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body container-fluid" >
+        <form id="addForm">
+        <div class="row" id="add-modal">
+
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="saveNew()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">edit</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="edit-modal">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="saveEdit()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <script src="/javascripts/main.js"></script>
+</body>
 </html>

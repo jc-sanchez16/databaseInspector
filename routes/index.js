@@ -1,19 +1,23 @@
 var express = require("express");
 var router = express.Router();
 
-const getDb = require("../dbManager").getDatabases;
-const getColections = require("../dbManager").getColections;
+const DB = require("./dbManager");
 /* GET home page. */
 router.get("/", function(req, res) {
-  console.log(getDb);
-  getDb();
-  res.render("index", { title: "Express" });
+  DB.getDatabases().then(dbs => {
+    res.render("index", { title: "Express", databases: dbs.databases });
+  });
 
 });
 router.get("/collections", function (req, res) {
-  req.body;
-  getColections();
-  res.render("index", { title: "Express" });
+  DB.getColections(req.query.dbName).then(data=>{
+    res.json(data);
+  });
+});
+router.get("/documents", function (req, res) {
+  DB.getDocuments(req.query.dbName,req.query.collectionName).then(data => {
+    res.json(data);
+  });
 
 });
-module.exports = router;
+module.exports = router; 
