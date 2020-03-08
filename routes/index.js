@@ -20,4 +20,8 @@ router.get("/documents", function (req, res) {
   });
 
 });
+router.get("/add", function (req, res) {
+  console.log(req);
+
+});
 module.exports = router; 
